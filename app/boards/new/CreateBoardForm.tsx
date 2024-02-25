@@ -1,10 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "~/src/components/form/Bouton";
 import { Input } from "~/src/components/form/Input";
 
 export default function CreateBoardForm() {
+  const router = useRouter();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
@@ -14,7 +17,9 @@ export default function CreateBoardForm() {
       body: JSON.stringify({ title }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then(() => {
+        router.refresh();
+      });
   };
 
   return (
