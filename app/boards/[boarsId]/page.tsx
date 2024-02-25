@@ -7,7 +7,6 @@ export default async function BoardId({
 }: {
   params: { boarsId: string };
 }) {
-  console.log(params);
 
   const boardId = Number(params.boarsId);
   const proposition = await prisma.proposition.findMany({
