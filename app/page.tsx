@@ -1,5 +1,5 @@
 import { BoardCard } from "~/src/components/board/BoardCard";
-import { Bouton, Button } from "~/src/components/form/Bouton";
+import { Button } from "~/src/components/form/Bouton";
 import { prisma } from "~/src/db/prisma";
 
 interface Board {
