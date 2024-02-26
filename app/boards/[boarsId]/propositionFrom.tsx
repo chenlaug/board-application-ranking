@@ -28,7 +28,7 @@ export default function PropositionFrom({ boardId }: PropositionFromProps) {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <h1> Create a new board</h1>
+      <h1> Create a new proposition</h1>
       <Input label="Title" name="title" />
       <Button type="submit">Create</Button>
     </form>

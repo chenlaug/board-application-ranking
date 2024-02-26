@@ -1,18 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Proposition } from "@prisma/client";
+import { Vote } from "@prisma/client";
 import { z } from "zod";
 import { prisma } from "~/src/db/prisma";
 
 type Data = {
-  proposition: Proposition;
+  vote: Vote;
 };
 
-const BodySchema = z.object({
-  title: z.string().min(1).max(255),
-});
-
 const QuerySchema = z.object({
-  boardId: z.string().transform((id) => Number(id)),
+  propositionId: z.string().transform((id) => Number(id)),
 });
 
 export default async function handler(
@@ -24,14 +20,13 @@ export default async function handler(
     return;
   }
   const query = QuerySchema.parse(req.query);
-  const body = BodySchema.parse(JSON.parse(req.body));
+  console.log(query);
 
-  const proposition = await prisma.proposition.create({
+  const vote = await prisma.vote.create({
     data: {
-      title: body.title,
-      boardId: query.boardId,
       ip: String(Math.random()),
+      propositionId: query.propositionId,
     },
   });
-  res.status(200).json({ proposition });
+  res.status(201).json({ vote });
 }
